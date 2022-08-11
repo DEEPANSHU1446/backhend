@@ -69,5 +69,95 @@ router.post("/test-post-4", function(req, res) {
     arr.push(ele)
     res.send(  { msg: arr , status: true }  )
 })
+router.post("/players", function(req,res) {
+    let players =
+    [
+        {
+            "name": "Sachin",
+            "dob": "1/1/1995",
+            "gender": "male",
+            "city": "Mumbai",
+            "sports": [
+                "swimming"
+            ]
+        },
+        {
+            "name": "Yuvraj",
+            "dob": "1/09/1995",
+           "gender": "male",
+           "city": "ludhiana",
+           "sports": [
+               "cricket"
+           ]
+       },
+       {
+           "name": "Bajrang",
+           "dob": "1/1/1990",
+           "gender": "male",
+           "city": "sonipat",
+           "sports": [
+               "wrestling"
+           ]
+       },
+   ];
+   let newplayer = req.body
+   for(i=0; i<players.length; i++) {
+    if (players[i].name!==newplayer.name){
+    players.push(newplayer)
+    res.send(  { data: players  }  )
+   }
+   else{
+    res.send("Newplayer already exist")
+}
+}    
+})
+let person =[
+    {
+        name:"Deepanshu",
+        age:22,
+        votingStatus :false
 
+    },
+    {
+        name:"sameer",
+        age:12,
+        votingStatus :false
+
+    },
+    {
+        name:"Gaurav",
+        age:24,
+        votingStatus :false
+
+    },
+    {
+        name:"Kirti",
+        age:14,
+        votingStatus :false
+
+    },
+    {
+        name:"Ritu",
+        age:52,
+        votingStatus :false
+
+    },
+    {
+        name:"Rajesh",
+        age:18,
+        votingStatus :false
+
+    },
+]
+router.post('/person', function (req, res) {
+       let votingAge =req.body
+       let eligibleVoters=[]
+       for (i=0;i<person.length;i++){
+        if (person[i].age>votingAge.age){
+            person[i].votingStatus= true
+            eligibleVoters.push(person[i])     
+        }
+       }
+       res.send({eligibleVoters})
+    })
 module.exports = router;
