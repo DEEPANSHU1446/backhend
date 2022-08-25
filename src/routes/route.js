@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+
+
+
 // const UserModel= require("../models/userModel.js")
 const UserController= require("../controllers/userController")
 const BookController= require("../controllers/bookController")
@@ -24,7 +27,7 @@ router.post("/createUser", UserController.createUser)
 // const mid1= function ( req, res, next) {
 //     console.log("Hi I am a middleware named Mid1")
 //     // logic
-//     let loggedIn = false
+//     // let loggedIn = false
 
 //     if (loggedIn== true) { 
 //         console.log( "OK LOGGED IS IS TRUE NOW")
