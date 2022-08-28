@@ -14,12 +14,12 @@ mongoose.connect("mongodb+srv://Deepanshuyadav:DEEPyadav1446@cluster0.f9r26yw.mo
 .then( () => console.log("MongoDb is connected"))
 .catch ( err => console.log(err) )
 
-app.use (
-    function (req, res, next) {
-        console.log ("I am Deepanshu Global middleware ");
-        next();
-  }
-  );
+// app.use (
+//     function (req, res, next) {
+//         console.log ("I am Deepanshu Global middleware ");
+//         next();
+//   }
+//   );
 
 app.use('/', route);
 
