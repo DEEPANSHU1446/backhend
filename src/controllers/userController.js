@@ -22,7 +22,7 @@ const loginUser = async function (req, res) {
   let token = jwt.sign(
     {
       userId: user._id.toString(),
-      batch: "thorium",
+      batch: "Plutonium",
       organisation: "FunctionUp",
     },
     "THIS IS BHUT JYDA KHATARNAK TOKEN"
@@ -38,9 +38,6 @@ const getUserData = async function (req, res) {
 
   let userId = req.params.userId;
   let userDetails = await userModel.findById(userId);
-  if (!userDetails)
-    return res.send({ status: false, msg: "No such user exists" });
-
   res.send({ status: true, data: [userDetails,decodedToken] });
 };
 
@@ -56,9 +53,6 @@ const updateUser = async function (req, res) {
   let userData = req.body;
   let updatedUser = await userModel.findOneAndUpdate({ _id:user}, userData);
   res.send({ status: true, data: updatedUser });
-
-
-
 }
 
 module.exports={createUser,getUserData,updateUser,loginUser,deleteUser} 
