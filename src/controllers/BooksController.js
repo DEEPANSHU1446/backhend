@@ -117,7 +117,7 @@ const updateBookById = async function (req, res) {
         if(!(/^[a-zA-Z]+([\s][a-zA-Z]+)*$/.test(details.title))) return res.status(400).send({ status: false, msg: "please update with correct title" })
         let checkDatainDb = await BooksModel.findOne({ title: details.title })
         if (checkDatainDb) return res.status(400).send({ status: false, msg: "title is already used" })}
-        let bookIsbnInDb = await BooksModel.findOne({ ISBN: details.ISBN,isDeleted:fa})
+        let bookIsbnInDb = await BooksModel.findOne({ ISBN: details.ISBN})
         if (bookIsbnInDb)
             return res.status(400).send({ status: false, msg: "ISBN is already used" })
 
