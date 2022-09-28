@@ -2,9 +2,7 @@ const BooksModel = require('../models/BooksModel')
 const userModel = require('../models/UserModel');
 const ObjectId = require('mongoose').Types.ObjectId
 const ReviewModel = require('../models/ReviewModel')
-
-
-
+const {uploadFile}=require('../aws/aws')
 
 //=======================CreateBooks==============================================
 
@@ -13,6 +11,18 @@ const createBooks = async function (req, res) {
     try {
         let data = req.body
         let { title, excerpt, userId, ISBN, category, subcategory, releasedAt } = data
+
+
+        let files= req.files
+        if(files && files.length>0){
+            //upload to s3 and get the uploaded link
+            // res.send the link back to frontend/postman
+            let uploadedFileURL= await uploadFile( files[0] )
+            data.bookCover = uploadedFileURL
+        }
+        else{
+            res.status(400).send({ msg: "No file found" })
+        }
 
         if (!(title))
             return res.status(400).send({ status: false, message: "Please enter  title" });
@@ -54,6 +64,7 @@ const createBooks = async function (req, res) {
 
     } catch (error) {
         res.status(500).send({ status: false, msg: error.message });
+        console.log(error)
     }
 }
 
